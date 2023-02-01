@@ -37,9 +37,18 @@ public class Reservation {
 		return TimeUnit.DAYS.convert(diferenca, TimeUnit.MILLISECONDS);
 	}
 	
-	public void updateDates(Date dataAluguel, Date dataDevolucao) {
+	public String updateDates(Date dataAluguel, Date dataDevolucao) {
+		Date now = new Date();
+		if (dataAluguel.before(now) || dataDevolucao.before(now)) {
+			return "Erro na reserva: Datas para atualizacao precisao ser futuras";
+
+		} 
+		if (!dataDevolucao.after(dataAluguel)) {
+			return "Erro na reserva data devolucao inferior a data do aluguel ";
+		}
 		this.dataAluguel = dataAluguel;
 		this.dataDevolucao = dataDevolucao;
+		return null;
 	}
 	
 	@Override

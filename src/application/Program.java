@@ -34,19 +34,17 @@ public class Program {
 			System.out.print("Data da devolucao (dd/MM/yyyy): ");
 			dataDevolucao = sdf.parse(sc.next());
 
-			Date now = new Date();
-			if (dataAluguel.before(now) || dataDevolucao.before(now)) {
-				System.out.println("Erro na reserva: Datas para atualizacao precisao ser futuras");
-
-			} else if (!dataDevolucao.after(dataAluguel)) {
-				System.out.println("Erro na resarva data devolucao inferior a data do aluguel ");
-			} else {
-				reservation.updateDates(dataAluguel, dataDevolucao);
+			
+			
+			
+			String error = reservation.updateDates(dataAluguel, dataDevolucao);
+			if (error != null) {
+				System.out.println("Error na reserva: " + error);
+			} 
+			else {
 				System.out.println("Reserva: " + reservation);
 
 			}
-			
-			
 
 			sc.close();
 
